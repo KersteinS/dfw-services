@@ -1,0 +1,15 @@
+[Unit]
+Description=DFW - Docker Firewall
+After=docker.service
+Requires=docker.service
+PartOf=docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+Environment=
+ExecStart=bash -c "DFW_START= /usr/bin/dfw"
+ExecStop=bash -c "DFW_STOP= /usr/bin/dfw"
+
+[Install]
+WantedBy=multi-user.target

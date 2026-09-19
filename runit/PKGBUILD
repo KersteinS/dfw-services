@@ -1,0 +1,13 @@
+pkgname=dfw-runit
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="runit package for dfw"
+arch=('any')
+depends=('runit' 'coreutils' 'dfw' 'docker')
+
+package() {
+    install -Dm755 "$startdir/dfw/run" "$pkgdir/etc/runit/sv/dfw/run"
+    install -Dm755 "$startdir/dfw/finish" "$pkgdir/etc/runit/sv/dfw/finish"
+    install -Dm755 "$startdir/dfw/log/run" "$pkgdir/etc/runit/sv/dfw/log/run"
+    install -d -m755 "$pkgdir/var/log/dfw"
+}

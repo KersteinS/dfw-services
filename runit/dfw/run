@@ -1,0 +1,12 @@
+#!/bin/sh
+exec 2>&1
+set -e
+file_path="/var/run/docker.pid"
+if [ ! -e "$file_path" ]; then
+  echo "File '$file_path' does not exist. Waiting for it to appear..."
+fi
+until [ -e "$file_path" ]; do
+  sleep 10
+done
+DFW_START= /usr/bin/dfw
+exec chpst -b dfw tail --pid=$(cat $file_path) -f /dev/null
